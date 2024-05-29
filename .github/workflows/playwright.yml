@@ -8,6 +8,7 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    environment: prod
     steps:
       - run: echo ${{ secrets.QASE_TESTOPS_API_TOKEN }} > .env.local
       - uses: actions/checkout@v4
