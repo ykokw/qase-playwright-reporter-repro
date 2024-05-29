@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { qase } from 'playwright-qase-reporter';
+// import { qase } from 'playwright-qase-reporter';
 
 test('link to about page', async ({ page }) => {
-  qase.id(111)
+  // qase.id(111)
   await page.goto('/');
 
   // Click the get started link.
