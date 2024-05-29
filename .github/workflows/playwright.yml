@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     steps:
-      - run: echo ${{ secrets.QASE_TESTOPS_API_TOKEN }} > .env.local
+      - run: echo "QASE_TESTOPS_API_TOKEN=${{ secrets.QASE_TESTOPS_API_TOKEN }}" > .env.local
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
