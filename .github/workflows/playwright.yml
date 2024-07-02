@@ -4,6 +4,13 @@ on:
     branches: [main, master]
   pull_request:
     branches: [main, master]
+  workflow_dispatch:
+    inputs:
+      testRunId:
+        description: "Qase Test Run ID"
+        required: false
+        type: number
+        default: 0
 jobs:
   test:
     timeout-minutes: 60
@@ -21,6 +28,10 @@ jobs:
       - run: echo "QASE_TESTOPS_API_TOKEN=${{ secrets.QASE_TESTOPS_API_TOKEN }}" > .env.local
       - name: Run Playwright tests
         run: npm test
+        if: ${{ inputs.testRunId == 0 }}
+      - name: Run Playwright tests with Run ID
+        run: QASE_TESTOPS_RUN_ID=${{ inputs.testRunId }} npm test
+        if: ${{ inputs.testRunId != 0 }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
