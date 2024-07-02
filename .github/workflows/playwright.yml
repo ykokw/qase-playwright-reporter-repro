@@ -16,6 +16,8 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     environment: prod
+    env:
+      QASE_TESTOPS_API_TOKEN: ${{ secrets.QASE_TESTOPS_API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -25,7 +27,6 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - run: echo "QASE_TESTOPS_API_TOKEN=${{ secrets.QASE_TESTOPS_API_TOKEN }}" > .env.local
       - name: Run Playwright tests
         run: npm test
         if: ${{ inputs.testRunId == 0 }}
